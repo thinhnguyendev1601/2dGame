@@ -1,0 +1,53 @@
+// {
+//     // Use IntelliSense to learn about possible attributes.
+//     // Hover to view descriptions of existing attributes.
+//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+//     "version": "0.2.0",
+//     "configurations": [
+        
+//         {
+//             "type": "java",
+//             "name": "Current File",
+//             "request": "launch",
+//             "mainClass": "${file}"
+//         },
+//         {
+//             "type": "java",
+//             "name": "Launch Main",
+//             "request": "launch",
+//             "mainClass": "main.Main",
+//             "projectName": "2Dgame_9cc826a9"
+//         }
+//     ]
+// }
+
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Edge",
+            "request": "launch",
+            "type": "msedge",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "main.Main",
+            "projectName": "2Dgame_9cc826a9",
+            "classPaths": [
+                "${workspaceFolder}/src"
+            ],
+            "vmArgs": "-Djava.library.path=${workspaceFolder}/lib"
+        }
+    ]
+}
