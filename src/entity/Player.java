@@ -112,10 +112,14 @@ public class Player extends Entity {
      * Updates player state
      */
     public void update() {
-        
+        if(keyH.upPressed==false && keyH.downPressed==false &&
+                keyH.leftPressed==false && keyH.rightPressed==false) {
+            idelcouter++;
+        }
         // Check for player movement
         if(keyH.upPressed || keyH.downPressed || 
            keyH.leftPressed || keyH.rightPressed) {
+            idelcouter=0;
             
             if(keyH.upPressed) {
                 direction = "up";
@@ -434,6 +438,9 @@ public class Player extends Entity {
                 image = right2;
             }
             break;
+        }
+        if(idelcouter>=180){
+            image=idel;
         }
         
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
