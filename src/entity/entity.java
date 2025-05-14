@@ -1,8 +1,12 @@
 package entity;
 
+import main.UtilityTool;
+
+import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * Base class for all game entities (player, NPCs, etc.)
@@ -34,6 +38,22 @@ public class Entity {
     public boolean collision = false;
     public boolean usable = false;
     public String description = "";
+    public BufferedImage setup(String imagePath, int width, int height)
+    {
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try
+        {
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
+            image = uTool.scaleImage(image,width,height);   //it scales to tilesize , will fix for player attack(16px x 32px) by adding width and height
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return image;
+    }
     
     /**
      * Updates entity state

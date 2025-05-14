@@ -155,7 +155,7 @@ public class Player extends Entity {
         // Check interact key
         if(keyH.interactPressed) {
             interactWithObject();
-            keyH.interactPressed = false;
+               keyH.interactPressed = false;
         }
         
         // Check for nearby objects for interaction
