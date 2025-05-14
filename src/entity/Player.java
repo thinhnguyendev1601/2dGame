@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -28,6 +29,7 @@ public class Player extends Entity {
     
     // Nearby object for interaction
     public Entity nearbyObject = null;
+    public int idelcouter=0;
     
     /**
      * Constructor for Player
@@ -75,25 +77,35 @@ public class Player extends Entity {
      */
     public void getPlayerImage() {
         
-        try {
+       // try {
             // Load all player sprites
             // Front view (down)
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
+           /* down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
             down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
-            
+
             // Back view (up)
             up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
             up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
-            
+
             // Side views
             left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
             right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
             right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
-            
+
         } catch(IOException e) {
             e.printStackTrace();
-        }
+        }*/
+        idel=setup("/player/mCidel",gp.tileSize,gp.tileSize);
+        up1 = setup("/player/mCup1",gp.tileSize*2,gp.tileSize*2);
+        up2 = setup("/player/mCup2",gp.tileSize*2,gp.tileSize*2);
+        down1 = setup("/player/mCdown1",gp.tileSize*2,gp.tileSize*2);
+        down2 = setup("/player/mCdown2",gp.tileSize*2,gp.tileSize*2);
+        left1 = setup("/player/mCleft1",gp.tileSize*2,gp.tileSize*2);
+        left2 = setup("/player/mCleft2",gp.tileSize*2,gp.tileSize*2);
+        right1 = setup("/player/mCright1",gp.tileSize*2,gp.tileSize*2);
+        right2 = setup("/player/mCright2",gp.tileSize*2,gp.tileSize*2);
+
     }
     
     /**
