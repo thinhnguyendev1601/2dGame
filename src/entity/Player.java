@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -29,8 +30,14 @@ public class Player extends Entity {
     
     // Nearby object for interaction
     public Entity nearbyObject = null;
-    public int idelcouter=0;
-    
+    protected int idelcounter=0;
+    private int aniIndex=0;
+    protected BufferedImage idelImage;
+    protected BufferedImage[]idelanimation;
+    private int waittime=0;
+    private int onceTimeimport=0;
+    private Boolean idelIsfull=false;
+
     /**
      * Constructor for Player
      * @param gp GamePanel reference
@@ -54,6 +61,11 @@ public class Player extends Entity {
         
         setDefaultValues();
         getPlayerImage();
+        if(onceTimeimport<1) {//once time import only
+            importidleImg();
+            loadidelAnimation();
+            onceTimeimport++;
+        }
     }
     
     /**
@@ -75,6 +87,36 @@ public class Player extends Entity {
     /**
      * Load player character sprites
      */
+    private void loadidelAnimation(){
+        idelanimation = new BufferedImage[5];
+        for (int j = 0; j < idelanimation.length; j++)
+            idelanimation[j] = idelImage.getSubimage(j * 64, 0, 64, 40);
+
+    }
+    private void importidleImg() {
+        InputStream is = getClass().getResourceAsStream("/player/player_sprites.png");
+        try {
+            idelImage = ImageIO.read(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private boolean isIdel(){
+        if(keyH.downPressed==false && keyH.upPressed==false &&
+                keyH.leftPressed== false && keyH.rightPressed==false){
+            waittime++;
+        }
+        if(waittime<=180){
+            return idelIsfull=false;
+        }
+        return idelIsfull=true;
+    }
     public void getPlayerImage() {
         
        // try {
@@ -112,14 +154,23 @@ public class Player extends Entity {
      * Updates player state
      */
     public void update() {
-        if(keyH.upPressed==false && keyH.downPressed==false &&
-                keyH.leftPressed==false && keyH.rightPressed==false) {
-            idelcouter++;
+        if(idelIsfull==true) {
+
+            if (waittime >= 180) {
+                idelcounter++;
+                if (idelcounter >= 10 && aniIndex <= idelanimation.length) {
+                    aniIndex++;
+                    idelcounter = 0;
+                }
+                if (aniIndex >= idelanimation.length) {
+                    aniIndex = 0;
+                }
+            }
         }
         // Check for player movement
         if(keyH.upPressed || keyH.downPressed || 
            keyH.leftPressed || keyH.rightPressed) {
-            idelcouter=0;
+            idelcounter=0;
             
             if(keyH.upPressed) {
                 direction = "up";
@@ -439,8 +490,8 @@ public class Player extends Entity {
             }
             break;
         }
-        if(idelcouter>=180){
-            image=idel;
+        if(idelIsfull==true){
+            image=idelanimation[aniIndex];
         }
         
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
