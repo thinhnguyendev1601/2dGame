@@ -153,19 +153,19 @@ public class Player extends Entity {
     /**
      * Updates player state
      */
+    private void updateIdelanimation(){
+        idelcounter++;
+        if (idelcounter >= 10 && aniIndex <= idelanimation.length) {
+            aniIndex++;
+            idelcounter = 0;
+        }
+        if (aniIndex >= idelanimation.length) {
+            aniIndex = 0;
+        }
+    }
     public void update() {
         if(idelIsfull==true) {
-
-            if (waittime >= 180) {
-                idelcounter++;
-                if (idelcounter >= 10 && aniIndex <= idelanimation.length) {
-                    aniIndex++;
-                    idelcounter = 0;
-                }
-                if (aniIndex >= idelanimation.length) {
-                    aniIndex = 0;
-                }
-            }
+            updateIdelanimation();
         }
         // Check for player movement
         if(keyH.upPressed || keyH.downPressed || 
