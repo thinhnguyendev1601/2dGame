@@ -49,7 +49,7 @@ public class TileManager  {
         getTileImage();
 
         //GET THE maxWorldCol & Row
-        is = getClass().getResourceAsStream("/map/bedroom.txt");
+        is = getClass().getResourceAsStream("/maps/bedroom.txt");
         br = new BufferedReader(new InputStreamReader(is));
 
         try
@@ -70,8 +70,10 @@ public class TileManager  {
         }
 
 
-        loadMap("/map/bedroom.txt",0); // To change maps easily.
-        loadMap("/map/hall.txt",1);
+        loadMap("/maps/bedroom.txt",0); // To change maps easily.
+        loadMap("/maps/hall.txt",1);
+        loadMap("/maps/stairs.txt",2);
+        loadMap("/maps/living room.txt",3);
         
 
     }
