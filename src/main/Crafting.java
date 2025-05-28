@@ -8,6 +8,7 @@ import object.OBJ_Radar;
 import object.OBJ_Battery;
 import object.OBJ_Capacitor;
 import object.OBJ_Sensor;
+import object.OBJ_RepairKit;
 
 /**
  * Handles the crafting mechanics and recipes
@@ -38,10 +39,11 @@ public class Crafting {
      * Sets up all crafting recipes for the game
      */
     private void setupRecipes() {
-        // Simple radar recipe: capacitor + sensor = radar
+        // Radar recipe: capacitor + sensor + repair kit = basic radar
         addRecipe("OBJ_Capacitor", "OBJ_Sensor", new OBJ_Radar(gp));
+        addRecipe("OBJ_Radar", "OBJ_RepairKit", new OBJ_Radar(gp, true)); // Repair kit upgrades radar
         
-        // If the radar also needs a battery
+        // Final powered radar recipe: repaired radar + battery = powered radar
         addRecipe("OBJ_Radar", "OBJ_Battery", new OBJ_Radar(gp, true)); // Powered radar version
         
         // Can add more recipes here as needed for Act I
