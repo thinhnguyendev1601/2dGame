@@ -102,6 +102,11 @@ public class AssetSetter {
         gp.obj[6] = new OBJ_Battery(gp);
         gp.obj[6].worldX = gp.tileSize * 30;
         gp.obj[6].worldY = gp.tileSize * 7;
+        
+        // Repair Kit for radar
+        gp.obj[7] = new OBJ_RepairKit(gp);
+        gp.obj[7].worldX = gp.tileSize * 24;
+        gp.obj[7].worldY = gp.tileSize * 9;
     }
     
     /**
@@ -109,17 +114,17 @@ public class AssetSetter {
      */
     private void setupStairsObjects() {
         // Broken Step
-        gp.obj[7] = new SuperObject();
-        gp.obj[7].name = "Broken Step";
-        gp.obj[7].down1 = gp.tileM.tile[15].image; // Using a specific tile image
-        gp.obj[7].collision = true;
-        gp.obj[7].worldX = gp.tileSize * 35;
-        gp.obj[7].worldY = gp.tileSize * 8;
+        gp.obj[8] = new SuperObject();
+        gp.obj[8].name = "Broken Step";
+        gp.obj[8].down1 = gp.tileM.tile[15].image; // Using a specific tile image
+        gp.obj[8].collision = true;
+        gp.obj[8].worldX = gp.tileSize * 35;
+        gp.obj[8].worldY = gp.tileSize * 8;
         
         // Repair materials
-        gp.obj[8] = new OBJ_RepairKit(gp);
-        gp.obj[8].worldX = gp.tileSize * 33;
-        gp.obj[8].worldY = gp.tileSize * 10;
+        gp.obj[9] = new OBJ_RepairKit(gp);
+        gp.obj[9].worldX = gp.tileSize * 33;
+        gp.obj[9].worldY = gp.tileSize * 10;
     }
     
     /**
@@ -127,27 +132,27 @@ public class AssetSetter {
      */
     private void setupLivingRoomObjects() {
         // Family Photo
-        gp.obj[9] = new OBJ_FamilyPhoto(gp);
-        gp.obj[9].worldX = gp.tileSize * 42;
-        gp.obj[9].worldY = gp.tileSize * 6;
+        gp.obj[10] = new OBJ_FamilyPhoto(gp);
+        gp.obj[10].worldX = gp.tileSize * 42;
+        gp.obj[10].worldY = gp.tileSize * 6;
         
         // Mask
-        gp.obj[10] = new OBJ_Mask(gp);
-        gp.obj[10].worldX = gp.tileSize * 45;
-        gp.obj[10].worldY = gp.tileSize * 8;
+        gp.obj[11] = new OBJ_Mask(gp);
+        gp.obj[11].worldX = gp.tileSize * 45;
+        gp.obj[11].worldY = gp.tileSize * 8;
         
         // Notebook
-        gp.obj[11] = new OBJ_Notebook(gp);
-        gp.obj[11].worldX = gp.tileSize * 40;
-        gp.obj[11].worldY = gp.tileSize * 9;
+        gp.obj[12] = new OBJ_Notebook(gp);
+        gp.obj[12].worldX = gp.tileSize * 40;
+        gp.obj[12].worldY = gp.tileSize * 9;
         
         // Steel Door (exit to Act II)
-        gp.obj[12] = new SuperObject();
-        gp.obj[12].name = "Steel Door";
-        gp.obj[12].down1 = gp.tileM.tile[16].image; // Using a specific tile image
-        gp.obj[12].collision = true;
-        gp.obj[12].worldX = gp.tileSize * 48;
-        gp.obj[12].worldY = gp.tileSize * 7;
+        gp.obj[13] = new SuperObject();
+        gp.obj[13].name = "Steel Door";
+        gp.obj[13].down1 = gp.tileM.tile[16].image; // Using a specific tile image
+        gp.obj[13].collision = true;
+        gp.obj[13].worldX = gp.tileSize * 48;
+        gp.obj[13].worldY = gp.tileSize * 7;
     }
     
     /**
@@ -177,9 +182,9 @@ public class AssetSetter {
             }
         }
         
-        // Technical Tunnel objects (index 4-6)
+        // Technical Tunnel objects (index 4-7)
         boolean inTunnel = currentLocation.equals("TechnicalTunnel");
-        for(int i = 4; i <= 6; i++) {
+        for(int i = 4; i <= 7; i++) {
             if(gp.obj[i] != null) {
                 if(!inTunnel) {
                     gp.obj[i].worldX = -1000;
@@ -190,9 +195,9 @@ public class AssetSetter {
             }
         }
         
-        // Stairs objects (index 7-8)
+        // Stairs objects (index 8-9)
         boolean inStairs = currentLocation.equals("Stairs");
-        for(int i = 7; i <= 8; i++) {
+        for(int i = 8; i <= 9; i++) {
             if(gp.obj[i] != null) {
                 if(!inStairs) {
                     gp.obj[i].worldX = -1000;
@@ -203,9 +208,9 @@ public class AssetSetter {
             }
         }
         
-        // Living Room objects (index 9-12)
+        // Living Room objects (index 10-13)
         boolean inLivingRoom = currentLocation.equals("LivingRoom");
-        for(int i = 9; i <= 12; i++) {
+        for(int i = 10; i <= 13; i++) {
             if(gp.obj[i] != null) {
                 if(!inLivingRoom) {
                     gp.obj[i].worldX = -1000;
