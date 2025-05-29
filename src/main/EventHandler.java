@@ -76,7 +76,7 @@ public class EventHandler{
             else if(hit(1,12,13, "any") == true) {teleport(0,10,39,gp.outside);} //from livingroom back to bedroom
             else if(hit(1,12,9, "up") == true) {speak(gp.npc[1][0]);} //merchant
 
-            else if(hit(0,12,9, "any") == true) {teleport(2,9,41,gp.dungeon);} //to the dungeon
+            else if(hit(0,12,9, "any") == true) {teleport(2,9,41,gp.dungeon);} //to stairs from the living room
             else if(hit(2,9,41, "any") == true) {teleport(0,12,9,gp.outside);} //to outside
             else if(hit(2,8,7, "any") == true) {teleport(3,32,41,gp.dungeon);} //to B2
             else if(hit(3,26,41, "any") == true) {teleport(2,8,7,gp.dungeon);} //to B1
