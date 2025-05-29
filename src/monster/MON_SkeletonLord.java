@@ -29,7 +29,7 @@ public class MON_SkeletonLord extends Entity {
         defense = 3;
         exp = 40;
         knockBackPower = 5;
-        sleep = true;
+        sleep = false;
 
         int size = gp.tileSize * 5;
         solidArea.x = 48;
