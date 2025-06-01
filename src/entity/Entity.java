@@ -51,6 +51,7 @@ public class Entity {
 
     //COUNTER
     public int spriteCounter = 0;
+    public int idleCounter = 0;
     public int actionLockCounter = 0;
     public int invincibleCounter = 0;
     public int shotAvailableCounter = 0;
