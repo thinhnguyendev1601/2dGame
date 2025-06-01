@@ -170,6 +170,8 @@ public class Player extends Entity{
             left2 = setup("/player/boy_left_2",gp.tileSize,gp.tileSize);
             right1 = setup("/player/boy_right_1",gp.tileSize,gp.tileSize);
             right2 = setup("/player/boy_right_2",gp.tileSize,gp.tileSize);
+            idle1 = setup("/player/boy_idle_1".gp.tileSize,gp.tileSize);
+            idle2 = setup("/player/boy_idle_2",gp.tileSize,gp.tileSize);
     }
     public void getSleepingImage(BufferedImage image)
     {
@@ -369,6 +371,21 @@ public class Player extends Entity{
                     spriteCounter = 0;                  // spriteCounter reset
                 }
         }
+        else if(keyH.upPressed = false && keyH.downPressed == false && KeyH.leftPressed == false && keyH.rightPressed == false == KeyH.enterPressed == false)
+        {
+            idleCounter++;
+            if(idleCounter > 60){
+                idle = true;
+                direction = "idle";
+                if(spriteNum == 1){
+                    spriteNum = 2;
+                }
+                if(spriteNum == 2){
+                    spriteNum = 1;                }
+            }
+            idleCounter == 0;
+        }
+            
         else        // This is for: If you release the key when you walking, change sprite num to 1 and use player's not-walking sprite.
         {
             standCounter++;
@@ -784,6 +801,12 @@ public class Player extends Entity{
                     image = guardRight;
                 }
                 break;
+            case "idle" :
+                if(attacking == false || guarding == false) 
+                {
+                    if(spriteNum == 1) {image = idle1;}
+                    if(spriteNum == 2) {image = idle2;}
+                }
         }
 
         //Make player half-transparent (%40) when invincible
