@@ -2,6 +2,9 @@
 
 <h3> JAVA 2D ACTION RPG </h3> 
 
+## The mods that our group make:
+MAPS, IDLE ANIMATION
+
 ## Installation
 * Download ZIP and Extract "Blue-Boy-Adventure-master" to Desktop.
 
@@ -30,7 +33,7 @@ Kill monsters! Get stronger! Buy powerful items! Find the dungeon keys! Solve th
 
 </br > 
 
-## Game Mechanics
+## Game Mechanics (Original gameplay)
 
 <h3> Guard </h3>
 
