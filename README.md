@@ -127,7 +127,20 @@ Then you get critical chance for 1 seconds. Critical hits give x2 damage.
 </br > </br >
 ![Screenshot 2025-06-02 163011](https://github.com/user-attachments/assets/9b8b1354-3de2-4daa-a28e-9863f26cef32)
 
-## Followed Steps
+</br > </br >
+![Screenshot 2025-06-02 163902](https://github.com/user-attachments/assets/9bf2f008-0014-49aa-aa26-70977534c2fe)
+
+</br > </br >
+![Screenshot 2025-06-02 164108](https://github.com/user-attachments/assets/7621fc24-b60d-40f7-beda-8dacaf5f86e7)
+
+</br > </br >
+![Screenshot 2025-06-02 164241](https://github.com/user-attachments/assets/ad935b10-6386-458d-b8d9-6a5626ec3243)
+
+</br > </br >
+![Screenshot 2025-06-02 164506](https://github.com/user-attachments/assets/67a035da-7e4c-4c1a-b4bf-edf63cedc517)
+
+## Followed Steps!
+
 1.  Mechanism of Game (GamePanel, Window, Thread...)
 2.  Game Loop & Key Inputs
 3.  Sprites & Animation
