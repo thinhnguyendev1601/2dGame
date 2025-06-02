@@ -13,7 +13,7 @@ import java.util.Random;
 public class Entity {
 
     GamePanel gp;
-    public BufferedImage up1,up2,down1,down2,left1,left2,right1,right2;
+    public BufferedImage up1,up2,down1,down2,left1,left2,right1,right2, idle1, idle2;
     public BufferedImage attackUp1,attackUp2,attackDown1,attackDown2,attackLeft1,attackLeft2,attackRight1,attackRight2,guardUp,guardDown,guardLeft,guardRight;
     public BufferedImage image, image2, image3;
     public Rectangle solidArea = new Rectangle(0,0, 48, 48);
@@ -34,8 +34,8 @@ public class Entity {
     public boolean collisionOn = false;
     public boolean invincible = false;
     public boolean attacking = false;
-    public boolean idle = false;
     public boolean alive = true;
+    public boolean idle = false;
     public boolean dying = false;
     public boolean hpBarOn = false;
     public boolean onPath = false;
@@ -51,8 +51,8 @@ public class Entity {
     public boolean drawing = true;
 
     //COUNTER
-    public int spriteCounter = 0;
     public int idleCounter = 0;
+    public int spriteCounter = 0;
     public int actionLockCounter = 0;
     public int invincibleCounter = 0;
     public int shotAvailableCounter = 0;
