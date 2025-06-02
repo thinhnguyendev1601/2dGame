@@ -124,7 +124,8 @@ Then you get critical chance for 1 seconds. Critical hits give x2 damage.
 
 ![options](https://user-images.githubusercontent.com/72252419/210121413-2bbcaa74-2130-48ca-9861-9ac969838c8f.png)
 
-</br >
+</br > </br >
+![new map](file:///C:/Users/user/Pictures/Screenshots/Screenshot%202025-06-02%20163011.png)
 
 ## Followed Steps
 1.  Mechanism of Game (GamePanel, Window, Thread...)
