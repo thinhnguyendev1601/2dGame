@@ -86,7 +86,7 @@ public class TileManager {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             // Map of which tile indices are defined in your tiledata.txt
-            int[] tileIndices = {0, 1, 2, 4, 6, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 91, 92};
+            int[] tileIndices = {0, 1, 2, 4, 6, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
             int currentIndex = 0;
 
             String line;
@@ -115,8 +115,8 @@ public class TileManager {
             }
 
             setup(0, "000.png", false);
-            setup(0, "004.png", false);
-            setup(0, "006.png", true);
+//            setup(0, "004.png", false);
+//            setup(0, "006.png", false);
 
         } catch (Exception e) {
             System.err.println("Error reading tiledata.txt: " + e.getMessage());
@@ -149,7 +149,7 @@ public class TileManager {
                 g2.setColor(new Color(150, 150, 150)); // Light gray
             }
 
-            g2.fillRect(0, 0, gp.tileSize, gp.tileSize);
+            g2.fillRect(0, 0, gp.tileSize, gp.tileSize);      
 
             // Add tile number for debugging
             g2.setColor(Color.WHITE);

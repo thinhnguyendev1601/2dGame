@@ -17,6 +17,7 @@ public class Player extends Entity{
     int standCounter = 0;
     public boolean attackCanceled = false;
     public boolean lightUpdated = false;
+    private String lastFacingDirection = "down";
 
     public Player(GamePanel gp, KeyHandler keyH)
     {
@@ -87,8 +88,8 @@ public class Player extends Entity{
     public void setDefaultPositions()
     {
         gp.currentMap = 0;
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 21;
+        worldY = gp.tileSize * 23;
         direction = "down";
     }
     public void setDialogue()
@@ -170,6 +171,8 @@ public class Player extends Entity{
             left2 = setup("/player/boy_left_2",gp.tileSize,gp.tileSize);
             right1 = setup("/player/boy_right_1",gp.tileSize,gp.tileSize);
             right2 = setup("/player/boy_right_2",gp.tileSize,gp.tileSize);
+            idle1 = setup("/player/boy_idle_1", gp.tileSize, gp.tileSize);
+            idle2 = setup("/player/boy_idle_2", gp.tileSize, gp.tileSize);
     }
     public void getSleepingImage(BufferedImage image)
     {
@@ -281,25 +284,70 @@ public class Player extends Entity{
         {
             guarding = true;
             guardCounter++;
+
+            //check for directional input while guarding
+            if(keyH.upPressed == true) {
+                direction = "up";
+                if(idle == true) {
+                    idle = false;
+                    idleCounter = 0;
+                }
+            }
+            else if(keyH.downPressed == true) {
+                direction = "down";
+                if(idle == true){
+                    idle = false;
+                    idleCounter = 0;
+                }
+            }
+            else if(keyH.leftPressed == true) {
+                direction = "left";
+                if(idle == true) {
+                    idle = false;
+                    idleCounter = 0;
+                }
+            }
+            else if(keyH.rightPressed == true) {
+                direction = "right";
+                if(idle == true) {
+                    idle = false;
+                    idleCounter = 0;
+                }
+            }
+            else if(direction.equals("idle")) {
+                //if no directional input and currently idle, use last facing positioning
+                direction = lastFacingDirection;
+                idle = false;
+                idleCounter = 0;
+            }
         }
         else if(keyH.upPressed == true || keyH.downPressed == true ||
                 keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true)
         {
+            //reset idle state when moving or attacking
+            if(idle == true) {
+                idle = false;
+                idleCounter = 0;
+            }
             if(keyH.upPressed == true)
             {
                 direction = "up";
+                lastFacingDirection = "up";
             }
             else if(keyH.downPressed == true)
             {                                                                 // You can go up and down while you pressing left or right.
-                direction = "down";                                           // But if you going up or down you cannot press left or right
+                direction = "down";
+                lastFacingDirection = "down";                                                                // But if you going up or down you cannot press left or right
             }                                                                 // The reason is here the if statements order.
             else if(keyH.leftPressed == true)                                 // For example when "keyH.upPressed == true", the else if blocks are not working. And you cannot go anyway when you press up.
             {
                 direction = "left";
+                lastFacingDirection = "left";
             }
             else if(keyH.rightPressed == true)
             {
                 direction = "right";
+                lastFacingDirection = "right";
             }
             //CHECK TILE COLLISION
             collisionOn = false;
@@ -352,7 +400,11 @@ public class Player extends Entity{
                 attacking = true;
                 spriteCounter = 0;
             }
-
+            //handle attack direction from the idle animation
+            if(direction.equals("idle")) {
+                direction = lastFacingDirection;
+            }
+            //if directional keys are also pressed, direction is already set above
             attackCanceled = false;
             gp.keyH.enterPressed = false;
             guarding = false;
@@ -369,8 +421,36 @@ public class Player extends Entity{
                     spriteCounter = 0;                  // spriteCounter reset
                 }
         }
+        else if(keyH.upPressed == false && keyH.downPressed == false &&
+                keyH.leftPressed == false && keyH.rightPressed == false && keyH.enterPressed == false && keyH.spacePressed == false){
+            idleCounter++;
+            if(idleCounter > 60) {
+                if(!idle) {
+                    idle = true;
+                    guarding = false;
+                    attacking = false;
+                    direction = "idle";
+                }
+
+                if (spriteNum == 1) {
+                    spriteNum = 2;
+                } else if (spriteNum == 2) {
+                    spriteNum = 1;
+                } 
+            idleCounter = 0;
+            }
+        }
+
         else        // This is for: If you release the key when you walking, change sprite num to 1 and use player's not-walking sprite.
         {
+            //reset idle when other keys are pressed
+            if(idle == true) {
+                idle = false;
+                idleCounter = 0;
+                if(direction.equals("idle")) {
+                    direction = lastFacingDirection;
+                }
+            }
             standCounter++;
             if(standCounter == 20)                       // After you release the key player stands 20 frames last position then spriteNum will be 1(default)
             {
@@ -445,6 +525,10 @@ public class Player extends Entity{
         }
     }
 
+//    public void idleAnimation(){
+//        direction = "idle";
+//        idle = true;
+//    }
 
     public void pickUpObject(int i)
     {
@@ -782,6 +866,12 @@ public class Player extends Entity{
                 if(guarding == true)
                 {
                     image = guardRight;
+                }
+                break;
+            case "idle":
+                if(attacking == false && guarding == false && idle == true){
+                    if(spriteNum == 1) {image = idle1;}
+                    if(spriteNum == 2) {image = idle2;}
                 }
                 break;
         }

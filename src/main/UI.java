@@ -788,7 +788,7 @@ public class UI {
 
             //TITLE NAME
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
-            String text = "Blue Boy Adventure\n";
+            String text = "Rạn\n";
             int x = getXforCenteredText(text);
             int y = gp.tileSize * 3;
             //SHADOW

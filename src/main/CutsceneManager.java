@@ -29,7 +29,7 @@ public class CutsceneManager {
     public CutsceneManager(GamePanel gp)
     {
         this.gp = gp;
-        endCredit = "Developed by\n"
+        endCredit = "Modded by our group: Minh Phuc, Tuan Dat, Duc Thinh, Quang Khai, Gia Thinh, originally developed by\n"
                 + "Berkayw"
                 + "\n\n\n\n\n\n\n\n\n\n\n"
                 + "Special Thanks\n\n"

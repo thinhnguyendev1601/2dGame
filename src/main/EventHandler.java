@@ -72,15 +72,34 @@ public class EventHandler{
         {
             if(hit(0,23,12, "up") == true) {healingPool(gp.dialogueState);}
             //else if(hit(0,27,16, "right") == true) {damagePit(gp.dialogueState);}
-            else if(hit(0,10,39, "any") == true) {teleport(1,12,13,gp.indoor);} //to merchant's house
-            else if(hit(1,12,13, "any") == true) {teleport(0,10,39,gp.outside);} //to outside
+            else if(hit(0,10,39, "any") == true) {teleport(1,12,13,gp.indoor);} //originally to the merchant's house, from the bedroom to the living room
+            else if(hit(1,12,13, "any") == true) {teleport(0,10,39,gp.outside);} //from living room back to becdroom
             else if(hit(1,12,9, "up") == true) {speak(gp.npc[1][0]);} //merchant
 
-            else if(hit(0,12,9, "any") == true) {teleport(2,9,41,gp.dungeon);} //to the dungeon
-            else if(hit(2,9,41, "any") == true) {teleport(0,12,9,gp.outside);} //to outside
-            else if(hit(2,8,7, "any") == true) {teleport(3,26,41,gp.dungeon);} //to B2
+            else if(hit(0,12,9, "any") == true) {teleport(2,9,41,gp.dungeon);} //to stairs from the living room
+            else if(hit(2,9,41, "any") == true) {teleport(0,12,9,gp.outside);} //return back to the living room from the stairs
+            else if(hit(2,8,7, "any") == true) {teleport(3,32,1,gp.dungeon);} //to hall fighting the skeleton lord, org col:26 and row:41
             else if(hit(3,26,41, "any") == true) {teleport(2,8,7,gp.dungeon);} //to B1
             else if(hit(3,25,27, "any") == true) {skeletonLord();} //BOSS
+
+
+//            //BEDROOM ROOM(Map 0) to LIVING ROOM(Map 1)
+//            else if(hit(0, 49,25, "any") == true) {teleport(1,2,25,gp.indoor);}
+//            //LIVING ROOM (Map ) to BEDROOM(Map 0)
+//            else if(hit(1,1,25, "any") == true) {teleport(0,48,25,gp.outside);}
+//            //LIVING ROOM(Map 1) to STAIRS(Map 2)
+//            else if(hit(1,24,49, "any") == true) {teleport(2,24,2,gp.indoor);}
+//            else if(hit(1, 25,49,"any") == true) {teleport(2,25,2,gp.indoor);}
+//            //STAIRS(Map 2) to LIVING ROOM(MAP 1)
+//            else if(hit(2,24,1,"any") == true) {teleport(1,24,48,gp.indoor);}
+//            else if(hit(2,25,1,"any") == true) {teleport(1, 25,48,gp.indoor);}
+//            //STAIRS(Map 2) to HALL(map 3)
+//            else if(hit(2,24,49,"any") == true) {teleport(3,24,2,gp.indoor);}
+//            else if(hit(2,25,49,"any") == true) {teleport(3,25,2,gp.indoor);}
+//            //HALL(Map 3) to STAIRS(Map 2)
+//            else if(hit(3,24,1,"any") == true) {teleport(2,24,48,gp.indoor);}
+//            else if(hit(3, 25,1,"any") == true) {teleport(2,25,48,gp.indoor);}
+
 
         }
 
