@@ -3,7 +3,7 @@
 <h3> JAVA 2D ACTION RPG </h3> 
 
 ## The mods that our group make:
-MAPS, IDLE ANIMATION
+MAPS, IDLE ANIMATION, NO NIGHT TRANSITION
 
 ## Installation
 * Download ZIP and Extract "Blue-Boy-Adventure-master" to Desktop.
