@@ -2,10 +2,14 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 import object.*;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -18,7 +22,14 @@ public class Player extends Entity{
     public boolean attackCanceled = false;
     public boolean lightUpdated = false;
     private String lastFacingDirection = "down";
-
+    protected int idelcounter=0;
+    protected BufferedImage[]idelanimation;
+    private int aniTick, aniIndex=0;
+    private int aniSpeed=24;
+    private int waittime=0;
+    private int onceTimeimport=0;
+    private Boolean idelIsfull=false;
+    private Boolean recoil=false;
     public Player(GamePanel gp, KeyHandler keyH)
     {
         super(gp); // calling constructor of super class(from entity class)
@@ -28,19 +39,64 @@ public class Player extends Entity{
         screenY = gp.screenHeight/2- (gp.tileSize/2);
 
         solidArea = new Rectangle();
-        solidArea.x = 8;
-        solidArea.y = 16;
+        solidArea.x = 32;
+        solidArea.y = 32;
         solidArea.width = 32;
         solidArea.height = 32;
-        solidAreaDefaultX = 8;
-        solidAreaDefaultY = 16;
-
+        solidAreaDefaultX = 32;
+        solidAreaDefaultY = 32;
+        if(onceTimeimport<1) {//once time import only
+            importidleImg();
+            loadidelAnimation();
+            onceTimeimport++;
+        }
 //      attackArea.width = 36;  //For test sword
 //      attackArea.height = 36;
 
         setDefaultValues(); // when u create Player object, initialize with default values
     }
+    private void loadidelAnimation(){
+        UtilityTool uTool=new UtilityTool();
+        idelanimation = new BufferedImage[4];
+        for (int j = 0; j < idelanimation.length; j++)
+            idelanimation[j] = uTool.scaleImage(idelImage.getSubimage(j * 64, 0,64,64 ),gp.tileSize*2,gp.tileSize*2);
 
+
+    }
+    private void importidleImg() {
+        InputStream is = getClass().getResourceAsStream("/player/newsprites.png");
+        try {
+            idelImage = ImageIO.read(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }private boolean idelChecker(){
+        if(keyH.downPressed==false && keyH.upPressed==false &&
+                keyH.leftPressed== false && keyH.rightPressed==false){
+            waittime++;
+        }
+        if(waittime<=180){
+            return idelIsfull=false;
+        }
+        return idelIsfull=true;
+    }
+    private void loadIdelimageToImage(){
+        idelcounter++;
+        if (idelcounter >= 30 && aniIndex <= idelanimation.length) {
+            aniIndex++;
+            idelcounter = 0;
+        }
+        if (aniIndex >= idelanimation.length) {
+            aniIndex = 0;
+        }
+    }
+    //Idelanimation loader
     public void setDefaultValues()
     {
         //Default Starting Positions
@@ -163,14 +219,14 @@ public class Player extends Entity{
 
     public void getImage()
     {
-            up1 = setup("/player/boy_up_1",gp.tileSize,gp.tileSize);
-            up2 = setup("/player/boy_up_2",gp.tileSize,gp.tileSize);
-            down1 = setup("/player/boy_down_1",gp.tileSize,gp.tileSize);
-            down2 = setup("/player/boy_down_2",gp.tileSize,gp.tileSize);
-            left1 = setup("/player/boy_left_1",gp.tileSize,gp.tileSize);
-            left2 = setup("/player/boy_left_2",gp.tileSize,gp.tileSize);
-            right1 = setup("/player/boy_right_1",gp.tileSize,gp.tileSize);
-            right2 = setup("/player/boy_right_2",gp.tileSize,gp.tileSize);
+            up1 = setup("/player/mCup1",gp.tileSize*2,gp.tileSize*2);
+            up2 = setup("/player/mCup2",gp.tileSize*2,gp.tileSize*2);
+            down1 = setup("/player/mCdown1",gp.tileSize*2,gp.tileSize*2);
+            down2 = setup("/player/mCdown2",gp.tileSize*2,gp.tileSize*2);
+            left1 = setup("/player/mCleft1",gp.tileSize*2,gp.tileSize*2);
+            left2 = setup("/player/mCleft2",gp.tileSize*2,gp.tileSize*2);
+            right1 = setup("/player/mCright1",gp.tileSize*2,gp.tileSize*2);
+            right2 = setup("/player/mCright2",gp.tileSize*2,gp.tileSize*2);
             idle1 = setup("/player/boy_idle_1", gp.tileSize, gp.tileSize);
             idle2 = setup("/player/boy_idle_2", gp.tileSize, gp.tileSize);
     }
@@ -230,7 +286,8 @@ public class Player extends Entity{
         guardRight = setup("/player/boy_guard_right",gp.tileSize,gp.tileSize);
     }
     public void update() // Runs 60 times every seconds.
-    {
+    {   if(idelChecker()==true) {
+        loadIdelimageToImage();}
         if(knockBack == true)
         {
 
@@ -323,7 +380,7 @@ public class Player extends Entity{
         }
         else if(keyH.upPressed == true || keyH.downPressed == true ||
                 keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true)
-        {
+        {   waittime=0;
             //reset idle state when moving or attacking
             if(idle == true) {
                 idle = false;
@@ -875,7 +932,9 @@ public class Player extends Entity{
                 }
                 break;
         }
-
+        if(idelIsfull){
+            image=idelanimation[aniIndex];
+        }
         //Make player half-transparent (%40) when invincible
         if(transparent == true)
         {
